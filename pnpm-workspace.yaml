@@ -1,6 +1,7 @@
 packages:
   - packages/*
   - test-apps/*
+  - "docs"
 onlyBuiltDependencies:
   - '@biomejs/biome'
   - esbuild
