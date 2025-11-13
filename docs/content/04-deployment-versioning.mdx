@@ -1,5 +1,5 @@
 ---
-title: "Deployment & Versioning"
+title: "v1.0.14 available changes!"
 summary: "Deploy and version your documentation"
 description: "Learn how to deploy your documentation to Fly.io and manage multiple versions using git tags and releases."
 ---
@@ -187,24 +187,24 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      
+
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
           node-version: '18'
-      
+
       - name: Install dependencies
         run: pnpm install
-      
+
       - name: Generate versioned docs
         run: pnpm run generate:docs -- --versions
         working-directory: ./docs
-      
+
       - name: Deploy to Fly.io
         uses: superfly/flyctl-actions/setup-flyctl@master
         with:
           version: latest
-      
+
       - run: flyctl deploy --remote-only
         working-directory: ./docs
         env:
