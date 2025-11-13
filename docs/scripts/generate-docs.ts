@@ -33,6 +33,11 @@ const resetDir = (p: string) => {
 const contentDir = "content"
 const workspaceRoot = process.cwd()
 const outputDir = resolve(workspaceRoot, "generated-docs")
+
+// biome-ignore lint/suspicious/noConsole: TODO remove this
+console.log(chalk.cyan(`Docs workspace root: ${workspaceRoot}`))
+// biome-ignore lint/suspicious/noConsole: TODO remove this
+console.log("outputDir:", outputDir)
 const allTags = () => run("git tag --list").split("\n").filter(Boolean)
 
 function resolveTagsFromSpec(spec: string) {
@@ -64,6 +69,8 @@ function buildDocs(sourceDir: string, outDir: string) {
 		)
 	}
 
+	// biome-ignore lint/suspicious/noConsole: TODO remove this
+	console.log(chalk.cyan(`Building docs from: ${sourceDir} → ${outDir}`))
 	const docsContentDir = resolve(sourceDir, contentDir)
 	if (!existsSync(docsContentDir)) {
 		throw new Error(
