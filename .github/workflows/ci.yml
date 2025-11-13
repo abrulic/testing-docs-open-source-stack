@@ -70,7 +70,7 @@ jobs:
 
       - name: Pack generated docs (tarball)
         run: |
-          tar -czf docs-generated.tgz generated-docs
+          tar -czf docs-generated.tgz -C docs generated-docs
           ls -lh docs-generated.tgz
 
       - name: Upload generated docs (tgz)
@@ -101,9 +101,13 @@ jobs:
           path: .
 
       - name: Unpack generated docs
+        # run: |
+        #   tar -xzf docs-generated.tgz
+        #   ls -laR generated-docs | sed -n '1,200p'
         run: |
-          tar -xzf docs-generated.tgz
-          ls -laR generated-docs | sed -n '1,200p'
+          set -euxo pipefail
+          tar -xzf docs-generated.tgz -C docs
+          ls -laR docs/generated-docs | sed -n '1,200p'
 
       - name: Download versions file
         uses: actions/download-artifact@v4
