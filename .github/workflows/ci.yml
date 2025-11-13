@@ -120,7 +120,6 @@ jobs:
         with:
           workspace_name: docs
           app_name: ${{ github.event.repository.name }}-${{ github.event.number }}
-          config_file_path: docs/fly.toml
           use_isolated_workspace: true
           env_vars: |
             APP_ENV=production
